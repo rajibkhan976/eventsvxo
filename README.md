@@ -7,4 +7,4 @@ Companies and organisations can create and modify events that will be stored int
 
 The reason for visiting the application is to easily create a new event, and also to modify an already existing event that is hosted by the company/organisation.
 
-This product will be useful for developers who want to implement event information in Växjö. It can also be used as a guideline to help developers create a similar or more advanced product.
+This product will be useful for developers who want to implement event information in Växjö into their product. It can also be used as a guideline to help developers create a similar or more advanced product.

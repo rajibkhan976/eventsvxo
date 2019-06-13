@@ -1,3 +1,25 @@
+getEvents = (req, res, next) => {
+  var query;
+  if (req.query.category) {
+    query = req.models.Events.find({ category: req.query.category })
+  } else {
+    query = req.models.Events.find()
+  }
+  query.exec().then((event) => {
+    return res.send(event);
+  }).catch((error) => {
+    next(error)
+  })
+}
+
+getById = (req, res, next) => {
+  req.models.Events.findById(req.params.id).then((event) => {
+    return res.send(event)
+  }).catch((error) => {
+    next(error)
+  })
+}
+
 addEvent = (req, res, next) => {
   req.models.Events.create({
     title: req.body.title,
@@ -22,14 +44,6 @@ addEvent = (req, res, next) => {
     img: req.body.img
   }).then((event) => {
     return res.status(201).send(event);
-  }).catch((error) => {
-    next(error);
-  })
-}
-
-getEvents = (req, res, next) => {
-  req.models.Events.find().then((events) => {
-    return res.send(events);
   }).catch((error) => {
     next(error);
   })
@@ -78,5 +92,6 @@ updateEventById = (req, res, next) => {
 module.exports = {
   addEvent,
   getEvents,
+  getById,
   updateEventById
 };

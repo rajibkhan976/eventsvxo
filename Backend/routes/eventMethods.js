@@ -49,14 +49,6 @@ addEvent = (req, res, next) => {
   })
 }
 
-// getEvents = (req, res, next) => {
-//   req.models.Events.find().then((events) => {
-//     return res.send(events);
-//   }).catch((error) => {
-//     next(error);
-//   })
-// }
-
 updateEventById = (req, res, next) => {
   req.models.Events.updateOne({_id: req.params.id}, {
     title: req.body.title,

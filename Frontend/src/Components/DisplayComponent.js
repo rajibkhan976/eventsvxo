@@ -17,6 +17,7 @@ class DisplayComponent extends Component {
     clear = clear;
     edit = edit;
 
+    //GET all the events
     componentDidMount = () => {
         fetch("http://localhost:2000/events")
         .then(res => {
@@ -29,12 +30,6 @@ class DisplayComponent extends Component {
         })
     }
 
-    showMore = () => {
-        this.setState({
-            showMore: !this.state.showMore
-        })
-    }
-
     render() {
         const events = this.state.events
         return(
@@ -43,7 +38,7 @@ class DisplayComponent extends Component {
                     <div key={i} className={styles.card}>
                         <img src={event.img} alt="related to the event" className={styles.chosenImg}/>
                         <div className={styles.icons}>
-                            <img src={this.clear} onClick={()=>this.props.clearButton(event._id)} alt="remove icon"/>
+                            <img src={this.clear} onClick={ () => this.props.clearButton(event._id) } alt="remove icon"/>
                             <img src={this.edit} onClick={this.props.editButton} alt="edit icon"/>                            
                         </div>
                         <div className={styles.container}>

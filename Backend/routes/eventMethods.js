@@ -89,9 +89,22 @@ updateEventById = (req, res, next) => {
   })
 }
 
+deleteEvent = (req, res, next) => {
+  req.models.Events.findByIdAndDelete(
+    req.params.id
+  ).then((event) => {
+    if (event)
+      return res.status(200).send(`${event.title} has been removed`)
+    res.sendStatus(204)
+  }).catch((error) => {
+    next(error)
+  })
+}
+
 module.exports = {
   addEvent,
   getEvents,
   getById,
-  updateEventById
+  updateEventById,
+  deleteEvent
 };

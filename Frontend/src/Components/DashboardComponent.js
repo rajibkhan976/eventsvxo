@@ -28,7 +28,7 @@ class DashboardComponent extends Component {
                 </div>
               </div>
               {this.state.toggleEventRegistrationForm ?
-                <AddEventComponent/> :
+                <AddEventComponent /> :
                 null
               }
                 <EventManagementComponent />

@@ -4,6 +4,10 @@ class AddEventComponent extends Component {
 
   constructor (props) {
     super (props);
+
+    this.state = {
+      toggleRegistrationForm: true
+    };
   }
 
   handleEventTitle = (e) => {
@@ -60,7 +64,6 @@ class AddEventComponent extends Component {
 
   handleEventAdditionalInfo = (e) => {
     this.eventAdditionalInfo = e.target.value;
-    alert(this.eventAdditionalInfo);
   }
 
   handleEventHost = (e) => {
@@ -72,46 +75,72 @@ class AddEventComponent extends Component {
   }
 
   addEvent = (e) => {
-    fetch("http://localhost:2000/events", {
-      method: 'POST',
-      mode: 'cors',
-      headers: {
-        'Access-Control-Allow-Origin': 'http://localhost:3000/',
-        'Access-Control-Allow-Credentials': 'true',
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        title: this.eventTitle,
-        start_date: {
-          year: this.eventStartYear,
-          month: this.eventStartMonth,
-          day: this.eventStartDay,
-          time: this.eventStartTime
+    if (
+      this.eventTitle !== undefined &&
+      this.eventStartYear !== undefined &&
+      this.eventStartMonth !== undefined &&
+      this.eventStartDay !== undefined &&
+      this.eventStartTime !== undefined &&
+      this.eventEndYear !== undefined &&
+      this.eventEndMonth !== undefined &&
+      this.eventEndDay !== undefined &&
+      this.eventEndTime !== undefined &&
+      this.eventLocation !== undefined &&
+      this.eventPrice !== undefined &&
+      this.eventCategory !== undefined &&
+      this.eventTags !== undefined &&
+      this.eventAdditionalInfo !== undefined &&
+      this.eventHost !== undefined &&
+      this.eventImg !== undefined
+    ) {
+      fetch("http://localhost:2000/events", {
+        method: 'POST',
+        mode: 'cors',
+        headers: {
+          'Access-Control-Allow-Origin': 'http://localhost:3000/',
+          'Access-Control-Allow-Credentials': 'true',
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
         },
-        end_date: {
-          year: this.eventEndYear,
-          month: this.eventEndMonth,
-          day: this.eventEndDay,
-          time: this.eventEndTime
-        },
-        location: this.eventLocation,
-        price: this.eventPrice,
-        category: this.eventCategory,
-        tags: this.eventTags,
-        additional_info: this.eventAdditionalInfo,
-        host: this.eventHost,
-        img: this.eventImg
+        body: JSON.stringify({
+          title: this.eventTitle,
+          start_date: {
+            year: this.eventStartYear,
+            month: this.eventStartMonth,
+            day: this.eventStartDay,
+            time: this.eventStartTime
+          },
+          end_date: {
+            year: this.eventEndYear,
+            month: this.eventEndMonth,
+            day: this.eventEndDay,
+            time: this.eventEndTime
+          },
+          location: this.eventLocation,
+          price: this.eventPrice,
+          category: this.eventCategory,
+          tags: this.eventTags,
+          additional_info: this.eventAdditionalInfo,
+          host: this.eventHost,
+          img: this.eventImg
+        })
+      }).then((res) => {
+        alert('Event registered successfully:)');
+        this.setState({
+          toggleRegistrationForm: false
+        });
+      }).catch((err) => {
+        alert(err);
       })
-    }).then((res) => {
-      alert('Eevent registered successfully:)');
-    }).catch((err) => {
-      alert(err);
-    })
+    } else {
+      alert('Please fill in the information correctly!');
+    }
   }
 
     render() {
         return(
+          <div>
+          {this.state.toggleRegistrationForm ?
             <div className = "row">
               <div className = "col-12">
                 <h2>Event registration</h2>
@@ -190,6 +219,10 @@ class AddEventComponent extends Component {
                 <button type="button" className="btn btn-success" onClick={this.addEvent}>Submit</button>
               </div>
             </div>
+            : null
+          }
+          </div>
+
         )
     }
 }

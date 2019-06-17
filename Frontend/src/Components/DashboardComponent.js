@@ -20,8 +20,8 @@ class DashboardComponent extends Component {
 
     render() {
         return(
-            <div className = "container">
-              <div className = "row">
+            <div>
+              <div>
                 <div className = "col-12 jumbotron">
                   <h1>Want to make your events popular?</h1> <br/>
                   <button type="button" className="btn btn-primary" onClick={this.eventRegistrationFormTogglar}>Add events</button>

@@ -222,7 +222,6 @@ class AddEventComponent extends Component {
             : null
           }
           </div>
-
         )
     }
 }

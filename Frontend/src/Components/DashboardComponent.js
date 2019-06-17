@@ -31,6 +31,7 @@ class DashboardComponent extends Component {
                 <AddEventComponent /> :
                 null
               }
+                <br/>
                 <EventManagementComponent />
             </div>
         )

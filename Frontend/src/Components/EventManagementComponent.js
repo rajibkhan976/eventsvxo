@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import { BrowserRouter, Route, Link, Redirect } from "react-router-dom";
 import DisplayComponent from './DisplayComponent.js';
 
 class EventManagementComponent extends Component {
@@ -232,6 +232,10 @@ class EventManagementComponent extends Component {
       }
     }
 
+    cancelUpdate = (e) => {
+      window.location.reload();
+    }
+
     render() {
         return(
             <div>
@@ -311,7 +315,8 @@ class EventManagementComponent extends Component {
                     <label className="float-left">Image :</label>
                     <input id="eventImg" type="file" accept="image/png, image/jpeg" onChange= {this.handleEventImg}/>
                   </div>
-                  <button type="button" className="btn btn-success" onClick={(e) => this.updateEvent(this.state.event_id)}>Submit</button>
+                  <button type="button" className="btn btn-success" onClick={(e) => this.updateEvent(this.state.event_id)}>Submit</button> &nbsp;
+                  <button type="button" className="btn btn-warning" onClick={this.cancelUpdate}>Cancel</button>
                 </div>
               </div>
             :

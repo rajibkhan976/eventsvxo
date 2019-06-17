@@ -40,7 +40,6 @@ class EventManagementComponent extends Component {
     }
 
     editButton = (event_id, e) => {
-        //function for edit/patch
         fetch("http://localhost:2000/events/" + event_id)
         .then((res) => {
             return res.json()
@@ -236,7 +235,7 @@ class EventManagementComponent extends Component {
         return(
             <div>
             {(this.state.toggleUpdateForm) ?
-              <div className = "row">
+              <div className = "container">
                 <div className = "col-12">
                   <h2>Update an event</h2>
                   <div className="form-group">

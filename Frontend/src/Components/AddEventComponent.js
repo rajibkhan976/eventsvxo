@@ -213,7 +213,7 @@ class AddEventComponent extends Component {
                   <input id="eventHost" className="form-control" type="text" onChange= {this.handleEventHost}/>
                 </div>
                 <div className="form-group">
-                  <label className="float-left">Image :</label>
+                  <label className="float-left">Image URL:</label>
                   <input id="eventImg" type="file" accept="image/png, image/jpeg" onChange= {this.handleEventImg}/>
                 </div>
                 <button type="button" className="btn btn-success" onClick={this.addEvent}>Submit</button>

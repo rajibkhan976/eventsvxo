@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route, Link, Redirect } from "react-router-dom";
+// import { BrowserRouter, Route, Link, Redirect } from "react-router-dom";
 import DisplayComponent from './DisplayComponent.js';
 
 class EventManagementComponent extends Component {
@@ -25,7 +25,8 @@ class EventManagementComponent extends Component {
         category: undefined,
         tags: undefined,
         additional_info: undefined,
-        host: undefined
+        host: undefined,
+        img: undefined
       };
     }
 
@@ -61,7 +62,8 @@ class EventManagementComponent extends Component {
               category: data.category,
               tags: data.tags,
               additional_info: data.additional_info,
-              host: data.host
+              host: data.host,
+              img: data.img
             });
         })
         .catch((err) => {
@@ -164,9 +166,15 @@ class EventManagementComponent extends Component {
       });
     }
 
-    handleEventImg = (e) => {
-      this.eventImg = e.target.value;
+    handleEventImg = (value, e) => {
+      this.setState({
+        img: value
+      });
     }
+
+    // handleEventImg = (e) => {
+    //   this.eventImg = e.target.value;
+    // }
 
     updateEvent = (event_id, e) => {
       if (
@@ -185,7 +193,7 @@ class EventManagementComponent extends Component {
         this.state.tags !== undefined &&
         this.state.additional_info !== undefined &&
         this.state.host !== undefined &&
-        this.eventImg !== undefined
+        this.state.img !== undefined
       ) {
         fetch("http://localhost:2000/events/" + event_id, {
           method: 'PATCH',
@@ -216,7 +224,7 @@ class EventManagementComponent extends Component {
             tags: this.state.tags,
             additional_info: this.state.additional_info,
             host: this.state.host,
-            img: this.eventImg
+            img: this.state.img
           })
         }).then((res) => {
           alert('Event updated successfully:)');
@@ -312,7 +320,7 @@ class EventManagementComponent extends Component {
                   </div>
                   <div className="form-group">
                     <label className="float-left">Image :</label>
-                    <input id="eventImg" type="file" accept="image/png, image/jpeg" onChange= {this.handleEventImg}/>
+                    <input id="eventImg" type="text" className="form-control" value={this.state.img} onChange= {(e) => this.handleEventImg(e.target.value)}/>
                   </div>
                   <button type="button" className="btn btn-success" onClick={(e) => this.updateEvent(this.state.event_id)}>Submit</button> &nbsp;
                   <button type="button" className="btn btn-warning" onClick={this.cancelUpdate}>Cancel</button>

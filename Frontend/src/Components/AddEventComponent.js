@@ -142,7 +142,7 @@ class AddEventComponent extends Component {
 
     render() {
         return(
-          <div>
+          <div className = "container">
           {this.state.toggleRegistrationForm ?
             <div className = "row">
               <div className = "col-12">

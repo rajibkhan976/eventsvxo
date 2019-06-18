@@ -21,6 +21,13 @@ app.use((error, req, res, next) => {
 
 app.use(cors());
 
+app.use((error, req, res, next) => {
+  if (res.headersSent) {
+    return next(err);
+  }
+  res.status(error.statusCode || error.status || 500).send({error: error});
+});
+
 app.use((req, res, next) => {
     req.models = db.models;
     next();
@@ -43,10 +50,14 @@ app.use('/', express.static(__dirname + '/swagger'));
 app.use('/swagger', swaggerUi.serve, swaggerUi.setup(null, options));
 app.use('/', routes);
 
-db.connectDb().then(() => {
-    const listener = app.listen(port, () => {
-        console.info(`Server is listening on port ${listener.address().port}`);
-    })
-});
+if (process.env.NODE_ENV != 'test') {
+  db.connectDb().then(() => {
+      const listener = app.listen(port, () => {
+          console.info(`Server is listening on port ${listener.address().port}`);
+      })
+  }).catch((error) => {
+    console.error(error);
+  });
+}
 
 module.exports = app;

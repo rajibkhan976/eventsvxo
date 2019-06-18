@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import styles from '../CSS/dashboard.module.css';
+
 import AddEventComponent from './AddEventComponent.js';
 import EventManagementComponent from './EventManagementComponent.js';
 
@@ -22,9 +24,13 @@ class DashboardComponent extends Component {
         return(
             <div>
               <div>
+                <div className={styles.header}>
+                  <h1 className={styles.fontLogo}>eventsvxo</h1>
+                  <h5 className={styles.fontLogo}>All the events in Växjö, gathered in one place</h5>
+                </div><br/>
                 <div className = "col-12 jumbotron">
-                  <h1>Want to make your events popular?</h1> <br/>
-                  <button type="button" className="btn btn-primary" onClick={this.eventRegistrationFormTogglar}>{this.state.toggleEventRegistrationForm ? 'Close form' : 'Add events'}</button>
+                  <h2 className={styles.addFont}>Want to add your event?</h2> <br/>
+                  <button type="button" className="btn btn-primary" onClick={this.eventRegistrationFormTogglar}>{this.state.toggleEventRegistrationForm ? 'Close form' : 'Add event'}</button>
                 </div>
               </div>
               {this.state.toggleEventRegistrationForm ?

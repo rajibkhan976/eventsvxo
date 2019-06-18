@@ -130,6 +130,7 @@ class AddEventComponent extends Component {
         this.setState({
           toggleRegistrationForm: false
         });
+        window.location.reload();
       }).catch((err) => {
         this.setState({
           error: err
@@ -217,7 +218,7 @@ class AddEventComponent extends Component {
                 </div>
                 <div className="form-group">
                   <label className="float-left">Image URL:</label>
-                  <input id="eventImg" type="file" accept="image/png, image/jpeg" onChange= {this.handleEventImg}/>
+                  <input id="eventImg" className="form-control" type="text" accept="image/png, image/jpeg" onChange= {this.handleEventImg}/>
                 </div>
                 <button type="button" className="btn btn-success" onClick={this.addEvent}>Submit</button>
               </div>

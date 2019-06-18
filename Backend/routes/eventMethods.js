@@ -91,7 +91,7 @@ updateEventById = (req, res, next) => {
 
 deleteEvent = (req, res, next) => {
   req.models.Events.findByIdAndDelete(
-    req.params.id
+    { _id: req.params.id }
   ).then((event) => {
     if (event)
       return res.status(200).send(`${event.title} has been removed`)

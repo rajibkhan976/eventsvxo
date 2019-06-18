@@ -6,7 +6,8 @@ class AddEventComponent extends Component {
     super (props);
 
     this.state = {
-      toggleRegistrationForm: true
+      toggleRegistrationForm: true,
+      error: undefined
     };
   }
 
@@ -130,7 +131,9 @@ class AddEventComponent extends Component {
           toggleRegistrationForm: false
         });
       }).catch((err) => {
-        alert(err);
+        this.setState({
+          error: err
+        });
       })
     } else {
       alert('Please fill in the information correctly!');
